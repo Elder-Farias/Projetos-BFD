@@ -1,27 +1,28 @@
 class Filme {
-    constructor(titulo, diretor, emprestado = false) {
+    constructor(titulo, diretor) {
         this.titulo = titulo;
         this.diretor = diretor;
-        this.emprestado = emprestado;
+        this.disponivel = true;
     }
 
-emprestarFilme(filme) {
-    if (!filme.emprestado) {
-        filme.emprestado = true;
-        console.log(`O filme "${filme.titulo}" foi emprestado com sucesso.`);
-    } else {
-        console.log(`O filme "${filme.titulo}" já está emprestado.`);
+    pegar(usuario) {
+        if (!this.disponivel) {
+            console.log(`O filme "${this.titulo}" não está disponível.`);
+            return false;
+        }
+        if (usuario.itensEmprestados.length >= 3) {
+            console.log(`${usuario.nome} já atingiu o limite de 3 itens.`);
+            return false;
+        }
+        this.disponivel = false;
+        usuario.pegarItem(this);
+        return true;
+    }
+
+    devolver(usuario) {
+        this.disponivel = true;
+        console.log(`${usuario.nome} devolveu o filme "${this.titulo}".`);
     }
 }
-
-    devolverFilme(filme) {
-        if (filme.emprestado) {
-            filme.emprestado = false;
-            console.log(`O filme "${filme.titulo}" foi devolvido com sucesso.`);
-        } else {
-            console.log(`O filme "${filme.titulo}" não estava emprestado.`);
-        }
-    }
-};
 
 module.exports = Filme;

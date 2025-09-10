@@ -1,37 +1,32 @@
 class Usuario {
-    constructor(nome, itensEmprestados = []) {
+    constructor(nome) {
         this.nome = nome;
-        this.itensEmprestados = itensEmprestados;
+        this.itensEmprestados = [];
     }
 
     pegarItem(item) {
-        if (!item.emprestado) {
-            item.emprestarLivro ? item.emprestarLivro(item) : item.emprestarFilme(item);
-            this.itensEmprestados.push(item);
+        this.itensEmprestados.push(item);
+        console.log(`${this.nome} pegou "${item.titulo}".`);
+    }
+
+    listarItensEmprestados() {
+        console.log(`Itens emprestados por ${this.nome}:`);
+        if (this.itensEmprestados.length === 0) {
+            console.log("Nenhum item emprestado.");
         } else {
-            console.log(`O item "${item.titulo}" já está emprestado.`);
+            this.itensEmprestados.forEach((item, i) => console.log(`${i + 1}. ${item.titulo}`));
         }
     }
 
     devolverItem(item) {
         const index = this.itensEmprestados.indexOf(item);
         if (index !== -1) {
-            item.devolverLivro ? item.devolverLivro(item) : item.devolverFilme(item);
+            item.devolver(this);
             this.itensEmprestados.splice(index, 1);
         } else {
             console.log(`O item "${item.titulo}" não foi emprestado por ${this.nome}.`);
         }
     }
-listarItensEmprestados() {
-        if (this.itensEmprestados.length === 0) {
-            console.log(`${this.nome} não tem itens emprestados.`);
-        } else {
-            console.log(`Itens emprestados por ${this.nome}:`);
-            this.itensEmprestados.forEach(item => {
-                console.log(`- ${item.titulo}`);
-            });
-        }
-    }
-};
+}
 
 module.exports = Usuario;

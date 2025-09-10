@@ -1,21 +1,24 @@
 class Biblioteca {
-    constructor(livros = []) {
-        this.livros = livros;
+    constructor() {
+        this.livros = [];
     }
+
     adicionarLivro(livro) {
         this.livros.push(livro);
-        console.log(`O livro "${livro.titulo}" foi adicionado à biblioteca.`);
+        console.log(`Livro "${livro.titulo}" adicionado à biblioteca.`);
     }
+
     listarLivros() {
+        console.log("Livros disponíveis:");
         if (this.livros.length === 0) {
-            console.log("Nenhum livro na biblioteca.");
+            console.log("Nenhum livro cadastrado.");
         } else {
-            console.log("Livros na biblioteca:");
-            this.livros.forEach(livro => {
-                console.log(`- ${livro.titulo} por ${livro.autor} (${livro.emprestado ? "Emprestado" : "Disponível"})`);
+            this.livros.forEach((l, i) => {
+                const status = l.disponivel ? "Disponível" : "Indisponível";
+                console.log(`${i + 1}. ${l.titulo} de ${l.autor} - ${status}`);
             });
         }
     }
-};
+}
 
 module.exports = Biblioteca;

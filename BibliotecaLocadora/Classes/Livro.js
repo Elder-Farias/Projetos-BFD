@@ -1,27 +1,28 @@
 class Livro {
-    constructor(titulo, autor, emprestado = false) {
+    constructor(titulo, autor) {
         this.titulo = titulo;
         this.autor = autor;
-        this.emprestado = emprestado;
+        this.disponivel = true;
     }
 
-emprestarLivro(livro) {
-    if (!livro.emprestado) {
-        livro.emprestado = true;
-        console.log(`O livro "${livro.titulo}" foi emprestado com sucesso.`);
-    } else {
-        console.log(`O livro "${livro.titulo}" já está emprestado.`);
+    pegar(usuario) {
+        if (!this.disponivel) {
+            console.log(`O livro "${this.titulo}" não está disponível.`);
+            return false;
+        }
+        if (usuario.itensEmprestados.length >= 3) {
+            console.log(`${usuario.nome} já atingiu o limite de 3 itens.`);
+            return false;
+        }
+        this.disponivel = false;
+        usuario.pegarItem(this);
+        return true;
     }
-};
 
-devolverLivro(livro) {
-    if (livro.emprestado) {
-        livro.emprestado = false;
-        console.log(`O livro "${livro.titulo}" foi devolvido com sucesso.`);
-    } else {
-        console.log(`O livro "${livro.titulo}" não estava emprestado.`);
+    devolver(usuario) {
+        this.disponivel = true;
+        console.log(`${usuario.nome} devolveu o livro "${this.titulo}".`);
     }
-};
-};
+}
 
 module.exports = Livro;

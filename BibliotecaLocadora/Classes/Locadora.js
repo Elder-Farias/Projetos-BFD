@@ -1,21 +1,24 @@
 class Locadora {
-    constructor(filmes = []) {
-        this.filmes = filmes;
+    constructor() {
+        this.filmes = [];
     }
+
     adicionarFilme(filme) {
         this.filmes.push(filme);
-        console.log(`O filme "${filme.titulo}" foi adicionado à locadora.`);
-    }  
+        console.log(`Filme "${filme.titulo}" adicionado à locadora.`);
+    }
+
     listarFilmes() {
+        console.log("Filmes disponíveis:");
         if (this.filmes.length === 0) {
-            console.log("Nenhum filme na locadora.");
+            console.log("Nenhum filme cadastrado.");
         } else {
-            console.log("Filmes na locadora:");
-            this.filmes.forEach(filme => {
-                console.log(`- ${filme.titulo} por ${filme.diretor} (${filme.emprestado ? "Emprestado" : "Disponível"})`);
+            this.filmes.forEach((f, i) => {
+                const status = f.disponivel ? "Disponível" : "Indisponível";
+                console.log(`${i + 1}. ${f.titulo} dirigido por ${f.diretor} - ${status}`);
             });
         }
     }
-};
+}
 
 module.exports = Locadora;
