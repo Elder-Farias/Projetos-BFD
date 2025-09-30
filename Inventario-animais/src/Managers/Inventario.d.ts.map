@@ -1,0 +1,1 @@
+{"version":3,"file":"Inventario.d.ts","sourceRoot":"","sources":["Inventario.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,MAAM,EAAC,MAAM,sBAAsB,CAAC;AAE5C,qBAAa,UAAU;IACnB,OAAO,CAAC,OAAO,CAAgB;IAE/B,SAAS,CAAC,MAAM,EAAE,MAAM,GAAG,IAAI;IAG/B,MAAM;IAMN,cAAc;CAMjB"}
